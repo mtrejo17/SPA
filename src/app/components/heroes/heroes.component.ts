@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import { HeroeModalComponent } from '../heroe-modal/heroe-modal.component';
+
 
 @Component({
   selector: 'app-heroes',
@@ -9,7 +12,9 @@ export class HeroesComponent implements OnInit {
 
   heroes: any[] = [];
 
-  constructor() { }
+  constructor(
+    private ngbModal: NgbModal
+  ) { }
 
   ngOnInit() {
     this.cargarHeroes();
@@ -68,6 +73,14 @@ export class HeroesComponent implements OnInit {
       }
     ];
     console.log('heroes-->', this.heroes);
+  }
+
+  mostrarHeroe(heroe: any) {
+    const modal = this.ngbModal.open(HeroeModalComponent, {});
+    modal.componentInstance.heroe = heroe;
+    modal.result.then(resp => {
+
+    });
   }
 
 }
